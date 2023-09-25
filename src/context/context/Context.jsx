@@ -10,12 +10,11 @@ export const GlobalProvider = ({ children }) => {
 	const [sorting, setSorting] = useState("market_cap_desc");
 	const [currentPage, setCurrentPage] = useState(1)
 	const [perPage, setPerPage] = useState(10)
-	const [active, setActive] = useState(false)
+	const [coinData, setCoinData] = useState()
+	
 
 
-	const activeHandler = () => {
-        setActive(!active)
-    }
+
 
 	const resetAll = () => {
 		setCurrentPage(1)
@@ -23,7 +22,19 @@ export const GlobalProvider = ({ children }) => {
 		setPerPage(10)
 	}
 
-
+	const getCoinData = async (coinId) => {
+		try {
+			const data = await fetch(
+				`https://api.coingecko.com/api/v3/coins/${coinId}?localization=false&tickers=false&market_data=true&community_data=false&developer_data=true&sparkline=false`
+			)
+				.then((res) => res.json())
+				.then((json) => json);
+			console.log(data);
+			setCoinData(data);
+		} catch (error) {
+			console.log(error);
+		}
+	};
 
 	const getCryptoData = async () => {
 		try {
@@ -73,9 +84,10 @@ export const GlobalProvider = ({ children }) => {
 				resetAll,
 				setPerPage,
 				perPage,
-				active,
-				setActive,
-				activeHandler
+				getCoinData,
+				coinData,
+				setCoinData
+				
 				
 			}}>
 			{children}

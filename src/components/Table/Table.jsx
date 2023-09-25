@@ -1,19 +1,17 @@
 import { GlobalProvider, GlobalState } from "../../context/context/Context";
 import { useContext } from "react";
 import Pagination from "../Pagination/Pagination";
+import { Link } from "react-router-dom";
 
 import TableButton from "./TableButton";
 // import CryptoDetails from "../CryptoDetails/CryptoDetails";
 
-
 const Table = () => {
 	let { cryptoData } = useContext(GlobalState);
 	let { pickCurrency, setPickCurrency } = useContext(GlobalState);
-	
 
 	return (
 		<>
-		
 			<div className="flex flex-col  border border-grey rounded  bg-lightblue my-4">
 				{cryptoData ? (
 					<table className="w-full table-auto ">
@@ -38,17 +36,28 @@ const Table = () => {
 										key={data.id}>
 										<td className=" py-4 flex items-center uppercase ">
 											<TableButton />
-
-											<img
-												src={data.image}
-												alt={data.name}
-												className=" w-12 mx-1.5"
-											
+											<Link to={`/${data.id}`} className="cursor-pointer">
 												
-											/>
-											<span>{data.symbol}</span>
+												<img
+													src={data.image}
+													alt={data.name}
+													className=" w-12 mx-1.5"
+												/>
+											</Link>
+
+											<span>
+												<Link to={`/${data.id}`} className="cursor-pointer">
+													
+													{data.symbol}
+												</Link>
+											</span>
 										</td>
-										<td className=" py-4 ">{data.name}</td>
+										<td className=" py-4 ">
+											<Link to={`/${data.id}`} className="cursor-pointer">
+												
+												{data.name}
+											</Link>
+										</td>
 										<td className=" py-4 ">
 											{new Intl.NumberFormat("en-US", {
 												style: "currency",
@@ -121,10 +130,20 @@ const Table = () => {
 						/>
 					</a>
 				</span>
-				
+
 				<Pagination />
 			</div>
 		</>
 	);
 };
 export default Table;
+
+{
+	/* <img
+src={data.image}
+alt={data.name}
+className=" w-12 mx-1.5"
+
+
+/> */
+}
