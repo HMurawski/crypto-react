@@ -2,6 +2,8 @@ import { useState } from "react";
 import { GlobalState } from "../../context/context/Context";
 import { useContext } from "react";
 import SetPage from "../Activities/SetPage";
+
+
 const Pagination = () => {
 	let { currentPage, setCurrentPage, perPage, cryptoData } = useContext(GlobalState);
 

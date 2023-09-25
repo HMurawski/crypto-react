@@ -1,5 +1,5 @@
 
-import { TrendingState } from "@/context/ContextTrending";
+import { TrendingState } from "../../context/context/ContextTrending";
 import { useContext } from "react";
 
 const TrendingTable = () => {
@@ -20,7 +20,7 @@ const TrendingTable = () => {
                 <p>Price in BTC: <span className="text-purple font-bold ml-1">{data.item.price_btc.toFixed(10)}</span></p>
                 <p>Score: <span className=" text-purple font-bold ml-1">{data.item.score}</span></p></div>
                
-                <img className=" w-24 my-2" src={data.item.large}></img>
+                <img className=" w-24 my-2" src={data.item.large} alt="currency logo"></img>
             </div>)
         })
         

@@ -1,27 +1,22 @@
-// import Header from "@/components/Header/Header"
-// import Layout from "@/components/Layout/Layout"
-// import Logo from "@/components/Logo/Logo"
-// import { GlobalProvider } from "@/context/Context"
-// import { TrendingProvider } from "@/context/ContextTrending"
-// import FavTable from "@/components/Table/FavTable"
-
+import { GlobalProvider } from "../context/context/Context";
+import { TrendingProvider } from "../context/context/ContextTrending";
+import Layout from "../components/Layout/Layout";
+import Header from "../components/Header/Header";
+import FavTable from "../components/Table/FavTable";
 
 const Fav = () => {
-    // return ( <GlobalProvider>
-    //     <TrendingProvider> 
-    //      <Layout>
-          
-    //     {/* <Logo /> */}
-    //     <Header />
-    //     <section className="w-[50%]  h-full flex flex-col mt-16 mb-24 relative"> 
-    //     <FavTable />
-        
-    //     </section>
-        
+	return (
+		<GlobalProvider>
+			<TrendingProvider>
+				<Layout>
+					<Header />
 
-
-    // </Layout>
-    // </TrendingProvider>
-    //      </GlobalProvider>)
-}
-export default Fav
+					<section className="w-[50%]  h-full flex flex-col mt-16 mb-24 relative">
+						<FavTable />
+					</section>
+				</Layout>
+			</TrendingProvider>
+		</GlobalProvider>
+	);
+};
+export default Fav;
