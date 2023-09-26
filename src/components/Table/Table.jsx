@@ -35,7 +35,7 @@ const Table = () => {
 										className="text-center text-base border-b border-grey last:border-b-0   "
 										key={data.id}>
 										<td className=" py-4 flex items-center uppercase ">
-											<TableButton />
+											<TableButton data={data} />
 											<Link to={`/${data.id}`} className="cursor-pointer">
 												
 												<img

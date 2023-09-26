@@ -1,6 +1,17 @@
-const TableButton = () => {
+import { useContext } from "react"
+import { StorageState } from "../../context/ContextStorage"
+
+const TableButton = ({data}) => {
+
+const {saveCoin} = useContext(StorageState)
+
+const handleClick = (e) => {
+	e.preventDefault()
+	saveCoin(data.id)
+}
+
     return (
-        <button className="outline-0 border-0 bg-none cursor-pointer">
+        <button className="outline-0 border-0 bg-none cursor-pointer" onCanPlay={(e) => handleClick(e)}>
 												<svg
 													className=" hover:fill-blue  ml-1 mr-4"
 													width="30"
