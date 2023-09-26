@@ -3,17 +3,24 @@ import { StorageState } from "../../context/ContextStorage"
 
 const TableButton = ({data}) => {
 
-const {saveCoin} = useContext(StorageState)
+const {saveCoin, removeCoin, allCoins} = useContext(StorageState)
+
 
 const handleClick = (e) => {
 	e.preventDefault()
 	saveCoin(data.id)
+
+	if (allCoins.includes(data.id)){
+		removeCoin(data.id)
+	} else {
+		saveCoin(data.id)
+	}
 }
 
     return (
-        <button className="outline-0 border-0 bg-none cursor-pointer" onCanPlay={(e) => handleClick(e)}>
+        <button className="outline-0 border-0 bg-none cursor-pointer" onClick={(e) => handleClick(e)}>
 												<svg
-													className=" hover:fill-blue  ml-1 mr-4"
+													className={`ml-1 mr-4 ${allCoins.includes(data.id) ? 'fill-darkblue' : ''}`}
 													width="30"
 													height="30"
 													viewBox="0 0 30 30"
