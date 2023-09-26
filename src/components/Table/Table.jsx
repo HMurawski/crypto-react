@@ -4,12 +4,12 @@ import Pagination from "../Pagination/Pagination";
 import { Link } from "react-router-dom";
 
 import TableButton from "./TableButton";
-// import CryptoDetails from "../CryptoDetails/CryptoDetails";
+
 
 const Table = () => {
 	let { cryptoData } = useContext(GlobalState);
 	let { pickCurrency, setPickCurrency } = useContext(GlobalState);
-
+	
 	return (
 		<>
 			<div className="flex flex-col  border border-grey rounded  bg-lightblue my-4">
@@ -138,12 +138,3 @@ const Table = () => {
 };
 export default Table;
 
-{
-	/* <img
-src={data.image}
-alt={data.name}
-className=" w-12 mx-1.5"
-
-
-/> */
-}

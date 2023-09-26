@@ -1,22 +1,41 @@
-
+import { NavLink } from "react-router-dom";
 const Header = () => {
 	return (
 		<nav className="w-[45%] mt-16 flex justify-around align-middle border  rounded-lg ">
-			<a
-				href="/"
-				className="w-full text-base bg-blue text-white text-center m-2.5 hover:bg-darkblue active:bg-darkblue border-0 cursor-pointer rounded ">
+			<NavLink
+				to="/"
+				end
+				className={({ isActive }) => {
+					return `w-full text-base bg-blue text-white text-center m-2.5
+						
+						${isActive ? "bg-darkblue font-bold" : ""}
+						
+						hover:bg-darkblue active:bg-darkblue border-0 cursor-pointer rounded `;
+				}}>
 				CRYPTO
-			</a>
-			<a
-				href="/trending"
-				className="w-full text-base bg-blue text-white text-center m-2.5 hover:bg-darkblue active:bg-darkblue border-0 cursor-pointer rounded ">
+			</NavLink>
+			<NavLink
+				to="/trending"
+				className={({ isActive }) => {
+					return `w-full text-base bg-blue text-white text-center m-2.5
+						
+						${isActive ? "bg-darkblue font-bold" : ""}
+						
+						hover:bg-darkblue active:bg-darkblue border-0 cursor-pointer rounded `;
+				}}>
 				TRENDING
-			</a>
-			<a
-				href="/favourites"
-				className="w-full text-base bg-blue text-white text-center m-2.5 hover:bg-darkblue active:bg-darkblue border-0 cursor-pointer rounded ">
+			</NavLink>
+			<NavLink
+				to="/favourites"
+				className={({ isActive }) => {
+					return `w-full text-base bg-blue text-white text-center m-2.5
+						
+						${isActive ? "bg-darkblue font-bold" : ""}
+						
+						hover:bg-darkblue active:bg-darkblue border-0 cursor-pointer rounded `;
+				}}>
 				FAVOURITE
-			</a>
+			</NavLink>
 		</nav>
 	);
 };
