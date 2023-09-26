@@ -80,18 +80,18 @@ getChartData(id)
 }, [id, type, days])
 
 
-    return (<div className=" w-full h-[80%]">
+    return (<div className=" w-full h-[60%]">
 
         <ChartComp data={chartData} currency={pickCurrency} type={type}/>
-        <div className="flex ">
-            <button onClick={() => setType("prices")}>Prices</button>
-            <button onClick={() => setType("market_caps")}>Market Caps</button>
-            <button onClick={() => setType("total_volumes")}>Total Volumes</button>
+        <div className="flex  justify-around  ">
+            <button  className={`text-base px-2  ${type==="prices" ? 'bg-orchid bg-opacity-40  rounded ' : ''} `} onClick={() => setType("prices")}>Prices</button> 
+            <button  className={`text-base px-2 ${type==="market_caps" ? 'bg-orchid bg-opacity-40 rounded ' : ''}  `} onClick={() => setType("market_caps")}>Market Caps</button>
+            <button  className={`text-base px-2 ${type==="total_volumes" ? 'bg-orchid bg-opacity-40 rounded ' : ''} `} onClick={() => setType("total_volumes")}>Total Volumes</button>
 
 
-            <button onClick={() => setDays(7)}>7d</button>
-            <button onClick={() => setDays(14)}>14d</button>
-            <button onClick={() => setDays(30)}>30d</button>
+            <button  className={`text-base px-2 ${days===7 ? 'bg-orchid bg-opacity-40 rounded ' : ''}`} onClick={() => setDays(7)}>7d</button>
+            <button  className={`text-base px-2 ${days===14 ? 'bg-orchid bg-opacity-40 rounded ' : ''} `} onClick={() => setDays(14)}>14d</button>
+            <button  className={`text-base px-2 ${days===30 ? 'bg-orchid bg-opacity-40  rounded' : ''} `} onClick={() => setDays(30)}>30d</button>
         </div>
 
     </div>)

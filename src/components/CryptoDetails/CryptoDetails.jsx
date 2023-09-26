@@ -36,6 +36,7 @@ const CryptoDetails = (props) => {
 
 	useLayoutEffect(() => {
 		getCoinData(coinId);
+		console.log(coinData);
 	}, [coinId]);
 
 	const closePopup = () => {
@@ -179,14 +180,14 @@ const CryptoDetails = (props) => {
 									<a
 										target="_blank"
 										rel="noreferrer"
-										className="text-base px-1.5 py-0.5 my-1 rounded"
+										className="text-base px-1.5 py-0.5 my-1 rounded bg-orchid bg-opacity-40 "
 										href={coinData?.links?.homepage[0]}>
 										{coinData?.links?.homepage[0].substring(0, 30)}
 									</a>
 									<a
 										target="_blank"
 										rel="noreferrer"
-										className="text-base px-1.5 py-0.5 my-1 rounded"
+										className="text-base px-1.5 py-0.5 my-1 rounded bg-orchid bg-opacity-40"
 										href={coinData?.links?.blockchain_site[0]}>
 										{coinData?.links?.blockchain_site[0].substring(0, 30)}
 									</a>
@@ -195,7 +196,7 @@ const CryptoDetails = (props) => {
 										<a
 											target="_blank"
 											rel="noreferrer"
-											className="text-base px-1.5 py-0.5 my-1 rounded"
+											className="text-base px-1.5 py-0.5 my-1 rounded bg-orchid bg-opacity-40"
 											href={coinData?.links?.official_forum_url[0]}>
 											{coinData?.links?.official_forum_url[0].substring(0, 30)}
 										</a>
@@ -232,6 +233,59 @@ const CryptoDetails = (props) => {
 
 						<div className="flex flex-col w-[45%] h-full pl-4 ">
 							<Chart id={coinData.id} />
+
+							<div className="flex flex-col mt-12">
+								<h3 className=" py-1">
+									<span>Market Cap Rank:</span>{" "}
+									{coinData.market_cap_rank > 20 ? (
+										<span className="text-red font-bold">
+											{coinData.market_cap_rank}
+										</span>
+									) : (
+										<span className="text-green font-bold">
+											{coinData.market_cap_rank}
+										</span>
+									)}
+								</h3>
+								<h3 className=" py-1">
+									<span>CoinGecko Rank:</span>{" "}
+									{coinData.coingecko_rank > 20 ? (
+										<span className="text-red font-bold">
+											{coinData.coingecko_rank}
+										</span>
+									) : (
+										<span className="text-green font-bold">
+											{coinData.coingecko_rank}
+										</span>
+									)}
+								</h3>
+								<h3 className=" py-1">
+									<span>Public Interest Score:</span>{" "}
+									{coinData.public_interest_score}
+								</h3>
+								<h3 className=" py-1">
+									<span>Community Score:</span> {coinData.community_score}
+								</h3>
+							</div>
+						</div>
+
+						<div className="absolute bottom-4 right-4">
+						<a className=" px-1.5 "  href={coinData.links.homepage[0]} target="_blank" rel="noreferrer">
+							<i class="fa-solid fa-house text-lg"></i>
+							</a>
+							<a className=" px-1.5 "  href={coinData.links.blockchain_site[0]} target="_blank" rel="noreferrer">
+							<i class="fa-brands fa-hive text-lg"></i>
+							</a>
+							<a className=" px-1.5 "  href={`https://www.twitter.com/${coinData.links.twitter_screen_name}`} target="_blank" rel="noreferrer">
+							<i class="fa-brands fa-twitter text-lg"></i>
+							</a>
+
+							<a className=" px-1.5 "  href={coinData.links.subreddit_url} target="_blank" rel="noreferrer">
+								<i class="fa-brands fa-reddit text-lg"></i>
+							</a>
+							
+							
+							
 						</div>
 					</div>
 				) : null}
