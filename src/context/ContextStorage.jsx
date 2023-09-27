@@ -1,5 +1,5 @@
-import { createContext, useLayoutEffect } from "react";
-import { useState, useContext } from "react";
+import { createContext, useEffect, useLayoutEffect } from "react";
+import { useState, useContext, } from "react";
 import { GlobalState } from "./context/Context";
 
 
@@ -7,10 +7,16 @@ export const StorageState = createContext({});
 
 export const StorageProvider = ({ children }) => {
 	
-    const [allCoins, setAllCoins] = useState()
+    const [allCoins, setAllCoins] = useState('')
     const [favData, setFavData] = useState()
+    const [isAllCoinsEmpty, setIsAllCoinsEmpty] = useState(allCoins.length === 0);
 
-    const {pickCurrency, sorting, currentPage, perPage } = useContext(GlobalState)
+
+    console.log(`stan 1`);
+    console.log(allCoins.length);
+
+
+    const {pickCurrency, sorting} = useContext(GlobalState)
 
 
     const saveCoin = (coinId) => {
@@ -22,6 +28,7 @@ export const StorageProvider = ({ children }) => {
             let newCoin = [...oldCoins, coinId]
             setAllCoins(newCoin)
             localStorage.setItem("coins", JSON.stringify(newCoin))
+            setIsAllCoinsEmpty(false)
         }
 
 
@@ -33,12 +40,16 @@ export const StorageProvider = ({ children }) => {
         let newCoin = oldCoins.filter(coin => coin !== coinId)
         setAllCoins(newCoin)
             localStorage.setItem("coins", JSON.stringify(newCoin))
+
+            if (newCoin.length === 0) {
+                setIsAllCoinsEmpty(true);
+              }
     }
 
 	const getFavData = async (totalCoins = allCoins) => {
 		try {
 			const data = await fetch(
-				`https://api.coingecko.com/api/v3/coins/markets?vs_currency=${pickCurrency}&ids=${totalCoins.join(",")}&order=${sorting}&per_page=${perPage}&page=${currentPage}&sparkline=false&price_change_percentage=1h%2C24h%2C7d%2C14d&locale=en`
+				`https://api.coingecko.com/api/v3/coins/markets?vs_currency=${pickCurrency}&ids=${totalCoins.join(",")}&order=${sorting}&sparkline=false&price_change_percentage=1h%2C24h%2C7d%2C14d&locale=en`
 			)
 				.then((res) => res.json())
 				.then((json) => json);
@@ -48,6 +59,21 @@ export const StorageProvider = ({ children }) => {
 			console.log(error);
 		}
 	};
+
+ 
+
+
+    
+    useEffect(()=>{
+        if(allCoins.length > 0){
+            getFavData(allCoins)
+        }else {
+           setFavData()
+        }
+
+    }, [allCoins, isAllCoinsEmpty])
+
+
 
 	useLayoutEffect(() => {
 		let isThere = JSON.parse(localStorage.getItem("coins")) || false;
@@ -64,9 +90,13 @@ export const StorageProvider = ({ children }) => {
             }
         }
 
+        
+  
       
 
 	}, []);
+
+
 
 	return (
 		<StorageState.Provider
@@ -74,7 +104,8 @@ export const StorageProvider = ({ children }) => {
 				saveCoin,
                 allCoins,
                 removeCoin,
-                favData
+                favData,
+                
 				
 			}}>
 			{children}

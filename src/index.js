@@ -35,7 +35,13 @@ const router = createBrowserRouter([
       },
       {
         path: "/favourites",
-        element: <Favourites />
+        element: <Favourites />,
+        children:[
+          {
+            path: ":coinId",
+            element: <CryptoDetails />
+          }
+        ]
       }
     ]
 	},
