@@ -1,22 +1,38 @@
-import { GlobalProvider } from "../context/context/Context";
-import { TrendingProvider } from "../context/context/ContextTrending";
-import Layout from "../components/Layout/Layout";
 import Header from "../components/Header/Header";
-import FavTable from "../components/Table/FavTable";
+import { Outlet } from "react-router-dom";
+import { GlobalProvider } from "../context/context/Context";
+import { useContext } from "react";
+import { TrendingState } from "../context/context/ContextTrending";
+import TrendTable from "../components/Table/TrendTable";
+import Layout from "../components/Layout/Layout";
 
 const Fav = () => {
-	return (
-		<GlobalProvider>
-			<TrendingProvider>
-				<Layout>
-					<Header />
+	
+const { trendingData } = useContext(TrendingState)
 
-					<section className="w-[50%]  h-full flex flex-col mt-16 mb-24 relative">
-						<FavTable />
-					</section>
-				</Layout>
-			</TrendingProvider>
-		</GlobalProvider>
+console.log(trendingData);
+	return (
+	
+			<Layout>
+				<Header />
+
+				<section className="w-[60%]  h-full flex flex-col mt-16 mb-24 relative">
+					<div className=" w-full min-h-[60vh] flex flex-wrap justify-evenly py-8 border border-grey rounded  bg-lightblue my-4">
+
+{
+	trendingData  && trendingData.map(data=> 
+	
+	<TrendTable data={data} key={data.item.coin_id}/>
+	)
+}
+						
+					</div>
+
+				</section>
+				<Outlet />
+			</Layout>
+		
 	);
+
 };
 export default Fav;
